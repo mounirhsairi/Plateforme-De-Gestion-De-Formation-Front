@@ -1,0 +1,51 @@
+<h2 mat-dialog-title></h2>
+<mat-dialog-content >
+    <div class="btn btn-toggle" (click)="toggleForm()">Toggle Form</div>
+    <div class="container mt-5">
+        <h1 class="mb-4">Add Employee</h1>
+        <form *ngIf="showForm">
+            <div class="mb-4">
+                <label for="excelFile" class="form-label">Select Excel File</label>
+                <input type="file" class="form-control" id="excelFile">
+            </div>
+        </form>
+        <form *ngIf="!showForm">
+            <div class="mb-3">
+                <label for="name" class="form-label">Nom</label>
+                <input type="text" class="form-control" id="name" placeholder="Enter name" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter email" required>
+            </div>
+            <div class="mb-3">
+                <label for="department" class="form-label">Ligne</label>
+                <select class="form-select" id="department" required>
+                    <option value="">Select Ligne</option>
+                    <option value="IT">IT</option>
+                    <option value="HR">HR</option>
+                    <option value="Finance">Finance</option>
+                    <option value="Marketing">Marketing</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="department" class="form-label">Opération</label>
+                <select class="form-select" id="department" required>
+                    <option value="">Select Opération</option>
+                    <option value="IT">IT</option>
+                    <option value="HR">HR</option>
+                    <option value="Finance">Finance</option>
+                    <option value="Marketing">Marketing</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="Num" class="form-label">Numéro de téléphone</label>
+                <input type="text" class="form-control" id="position" placeholder="Numéro de téléphone" required>
+            </div>
+        </form>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close-Cancel></button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial class="btn btn-primary" type="submit" style="margin-left: 40%;">OK</button>
+</mat-dialog-actions>
