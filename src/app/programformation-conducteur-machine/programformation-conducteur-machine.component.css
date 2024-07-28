@@ -1,0 +1,87 @@
+.content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+ /* overflow-y: auto;
+  max-height: 70vh;*/
+
+}
+
+h1 {
+  text-align: center;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+}
+
+input[type="text"], input[type="date"], input[type="number"], textarea {
+  width: 100%;
+  /*padding: 8px;
+  margin-top: 5px;*/
+  border:none
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table, th, td {
+  border: 1px solid #ccc;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+}
+
+li , h2 ,.bareme ,.evaluation ,.tabledecision{
+  break-inside: avoid;
+}
+
+
+
+
+table.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+table.styled-table, table.styled-table th, table.styled-table td {
+  border: 1px solid #000;
+}
+
+table.styled-table th, table.styled-table td {
+  padding: 8px;
+  text-align: left;
+}
+
+table.styled-table th {
+  background-color: #f2f2f2;
+}
+
+
+
+table.inner-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: none;
+}
+
+table.inner-table td {
+  border: none;
+  
+  padding: 4px;
+  text-align: left;
+}
+
+table.inner-table input[type="date"] {
+  width: auto;
+}
+

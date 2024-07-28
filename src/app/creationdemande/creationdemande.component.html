@@ -1,9 +1,9 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-4" style="margin-left: 15%;">
-      <h2 >Creation d'une demande</h2>
+    <div class="col-md-4 offset-md-2" >
+      <h2 style="margin-top: 5px;" >Creation d'une demande</h2>
   </div>
-  <div class="col-md-2" style="margin-left: 28%;">
+  <!--<div class="col-md-2" style="margin-left: 28%;">
     <mat-form-field class="example-full-width">
       <input type="text" placeholder="Search" matInput [matAutocomplete]="auto" [formControl]="searchControl">
       <mat-autocomplete #auto="matAutocomplete">
@@ -12,45 +12,42 @@
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
-  </div>
+  </div>-->
   
   
   
-    <div class="col">
-      <button class="btn">
-        <i class="fas fa-sliders-h"style="font-size:30px"></i>
+    <div class="col-md-1 offset-md-5">
+      <button class="btn" (click)="openDialog()">
+        <i class="fas fa-file-code"style="font-size:40px"></i>
       </button>
     </div>
   </div>
 </div>
 <div class="container mt-4" >
   <div class="row">
-    <div class="col-md-3 offset-md-2">
-      <div class="card">
+    <div class="col-md-3 offset-md-4">
+      <div class="card" (click)="openDialogBesoin()">
         <div class="card-img-overlay">
           <h5 class="card-title">Besoin de personnel</h5>
         </div>
-        <img src="assets/Ficheinscri.png" class="card-img" alt="Image 1">
+        <img src="assets/image.png" class="card-img" alt="Image 1">
       </div>
     </div>
     <div class="col-md-3">
-      <div class="card">
+      <div class="card" (click)="openDialogPolyvalence()">
         <div class="card-img-overlay">
-          <h5 class="card-title">Fiche d'inscription</h5>
+          <h5 class="card-title">Polyvalence</h5>
         </div>
-        <img src="assets/Ficheinscri.png" class="card-img" alt="Image 2">
+       <img src="assets/image2.png" class="card-img" alt="Image 2">
         
       </div>
-    </div>
-    <div class="col-md-3">
-      <div class="card">
-        <div class="card-img-overlay">
-          <h5 class="card-title">PDF Template 3</h5>
-        </div>
-        <img src="assets/Ficheinscri.png" class="card-img" alt="Image 3">
-      </div>
+      <div class="card-body" [innerHTML]="renderedHtml"></div>
+
     </div>
   </div>
 </div>
+<div>
+ 
+
 
 

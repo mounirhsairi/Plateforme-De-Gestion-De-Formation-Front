@@ -1,0 +1,82 @@
+<h2 mat-dialog-title></h2>
+<mat-dialog-content>
+    <div class="container mt-5">
+        <h1 class="mb-4">Besoin de personnel</h1>
+        <form [formGroup]="BesoinPersonnel" >
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="nombre" formControlName="nombre" placeholder="Enter nombre d'opérateurs" required>
+            </div>
+            <div class="mb-3">
+                <label for="department" class="form-label">Ligne</label>
+                <select class="form-select" id="department" required  (change)="getAllOperationByLigne($event)" >
+                    <option value="">Select Ligne</option>
+                    <option value="{{item.id}}" *ngFor="let item of ligne" >{{item.nomLigne}}</option>
+                    
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="department" class="form-label">Poste à pourvoir</label>
+                <select class="form-select" id="department" formControlName="idOperation" required>
+                    <option value="">Select Opération</option>
+                    <option *ngFor="let operations of operation"  [value]="operations.id">{{operations.operationName}}</option>
+                    
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="niveau" class="form-label">Niveau</label>
+                <input type="text" class="form-control" id="niveau" formControlName="niveau" placeholder="Enter Niveau" required>
+            </div>
+            <div class="mb-3">
+                <label for="date-embauche-souhaitee" class="form-label">Date d'embauche souhaitée</label>
+                <input type="date" class="form-control" id="date-embauche-souhaitee" formControlName="dateDembaucheSouhaitee" placeholder="Enter " required>
+            </div>
+            <h2>Type de poste</h2>
+            <mat-radio-group formControlName="type" aria-label="Select an option">
+                <mat-radio-button value="Poste vacant">Poste vacant</mat-radio-button>
+                <mat-radio-button value="Nouveau">Nouveau</mat-radio-button>
+                <mat-radio-button value="A durée limitée">A durée limitée</mat-radio-button>
+              </mat-radio-group>
+            
+            <h2>Motif de recrutement</h2>
+
+            <textarea name="motif-de-recrutement" formControlName="motif" placeholder="Motif de recrutement" id="" cols="90" rows="10"></textarea>
+            <h2>Horaire de travail</h2>
+            <!--<mat-radio-group formControlName="horaireDeTravail" aria-label="Select an option">
+                <mat-radio-button value="parGroupe">Par groupe</mat-radio-button>
+                <mat-radio-button value="groupeDeNuit">Groupe de nuit</mat-radio-button>
+                <mat-radio-button value="horaireNormal">Horaire normal</mat-radio-button>
+              </mat-radio-group>-->
+              <select multiple class="form-select" formControlName="horaireDeTravail">
+                <option  value="parGroupe">Par groupe</option>
+                <option  value="groupeDeNuit">Groupe de nuit</option>
+                <option  value="horaireNormal">Horaire normal</option>
+
+            </select>
+            
+            <h2>Sexe :</h2>
+            <mat-radio-group formControlName="sexe" aria-label="Select an option">
+                <mat-radio-button value="Masculin">Masculin</mat-radio-button>
+                <mat-radio-button value="Féminin">Féminin</mat-radio-button>
+                <mat-radio-button value="PeuImporte">Peu importe</mat-radio-button>
+              </mat-radio-group>
+            <div class="mb-3">
+                <h2>Age :</h2>
+                <mat-radio-group formControlName="age" aria-label="Select an option">
+                    <mat-radio-button value="[18:20]">[18:20]</mat-radio-button>
+                    <mat-radio-button value="[20:25]">[20:25]</mat-radio-button>
+                    <mat-radio-button value="[25:40]">[25:40]</mat-radio-button>
+                    <mat-radio-button value="Peu Importe">Peu Importe</mat-radio-button>
+
+                  </mat-radio-group>
+            </div>  
+            <button mat-button  [mat-dialog-close]="true" class="btn btn-primary" style="margin-left: 25%;"(click)="Besoin('En_Attente')">Enregistrer</button>
+            <button mat-button  [mat-dialog-close]="true" class="btn btn-primary" style="margin-left: 5%;"(click)="Enregistreretenvoyer('Envoyé_Vers_RUAP')">Enregistrer et Envoyer</button>
+            <button mat-button  [mat-dialog-close]="true" class="btn btn-primary" style="margin-left: 5%;">Supprimer</button>
+
+        </form>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <!--<button mat-button mat-dialog-close>Cancel</button>-->
+</mat-dialog-actions>

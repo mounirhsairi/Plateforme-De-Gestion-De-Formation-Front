@@ -1,0 +1,48 @@
+<h2 mat-dialog-title>Information sur la Demande</h2>
+<mat-dialog-content>
+  <div class="dialog-container">
+    <div class="row">
+      <div class="label">Demande ID:</div>
+      <div class="value">{{ demande.matriculeDemande }}</div>
+    </div>
+    
+    <div class="row">
+      <div class="label">État:</div>
+      <div class="value">{{ demande.etat }}</div>
+    </div>
+    <div class="row">
+      <div class="label">Horaire de travail:</div>
+      <div class="value">{{ demande.horaireDeTravail }}</div>
+    </div>
+    <div class="row">
+      <div class="label">type de poste:</div>
+      <div class="value">{{ demande.type }}</div>
+    </div>
+    <div class="row">
+      <div class="label">Âge:</div>
+      <div class="value">
+        <select [(ngModel)]="demande.age">
+          <option value="[18:20]">[18:20]</option>
+          <option value="[20:25]">[20:25]</option>
+          <option value="[25:40]">[25:40]</option>
+          <option value="Peu Importe">Peu Importe</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="label">Motif:</div>
+      <div class="value"><input type="text" [(ngModel)]="demande.motif"></div>
+    </div>
+    
+    <div class="row">
+      <div class="label">Nombre:</div>
+      <div class="value"><input type="number" [(ngModel)]="demande.nombre"></div>
+    </div>
+    <!-- Ajoutez d'autres propriétés ici si nécessaire -->
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]>Annuler</button>
+  <button mat-button (click)="onUpdateDemande(demande.id, demande)"[mat-dialog-close]>Mettre à jour</button>
+</mat-dialog-actions>

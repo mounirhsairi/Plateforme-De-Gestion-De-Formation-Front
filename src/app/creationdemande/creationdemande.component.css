@@ -1,26 +1,27 @@
 .card {
-    position: relative;
-    transition: transform 0.3s;
-    cursor: pointer;
-  }
-  .card:hover {
-    transform: translateY(-5px);
-  } 
-  
-  .card-img-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(0, 0, 0, 0.5); /* Background color for the overlay */
-  }
-  
-  .card-title {
-    color: #fff; /* Color for the title text */
-    font-size: 24px; /* Adjust the font size as needed */
-  }
-  
+  position: relative;
+  transition: transform 0.3s;
+  cursor: pointer;
+  margin-top: 15%;
+}
+.card:hover {
+  transform: translateY(-5px);
+} 
+
+.card-img-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5); /* Background color for the overlay */
+}
+
+.card-title {
+  color: #fff; /* Color for the title text */
+  font-size: 24px; /* Adjust the font size as needed */
+  margin-left: 25px;
+}

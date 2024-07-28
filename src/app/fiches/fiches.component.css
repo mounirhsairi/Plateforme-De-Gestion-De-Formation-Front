@@ -1,0 +1,21 @@
+.custom-menu {
+  background-color: #fff; /* Change background color */
+  border-radius: 4px; /* Add border radius */
+  box-shadow: 0px 0px 10px rgba(219, 11, 11, 0.1); /* Add box shadow */
+}
+
+.select-field {
+  width: 100%; /* Set width to 100% */
+  margin-bottom: 10px; /* Add margin bottom between select fields */
+}
+
+.mat-option {
+  color: #35069c; /* Change option text color */
+}
+.menu-content {
+  padding: 16px; /* Add padding */
+  width: 200px; /* Set width */
+}
+mat-form-field{
+  padding: 20px;
+}

@@ -1,45 +1,68 @@
 <div class="container">
   <div class="row">
     <div class="col-md-4" style="margin-left: 15%;">
-      <h2 >Matrice de compétences</h2>
-  </div>
-  <div class="col-md-2" style="margin-left: 28%">
-      <div class="input-group rounded" style="border: 1px solid #939597;">
-          <input type="text" class="form-control border-0" placeholder="Search" aria-label="Search" />
-          <span class="input-group-text px-1" style="background-color: rgb(255, 255, 255); border: none;">
-              <i class="fas fa-search" style="color:#939597;"></i>
-          </span>
-      </div>
-  </div>
-  
+      <h2>Matrice de compétences</h2>
+    </div>
+    <div class="col-md-2" style="margin-left: 28%;">
+      <app-search (searchResults)="onSearchResults($event)"></app-search>
+    </div>
     <div class="col">
-      <button class="btn">
-        <i class="fas fa-sliders-h"style="font-size:30px"></i>
+      <button class="btn" mat-button [matMenuTriggerFor]="menu" #menuTrigger>
+        <i class="fas fa-sliders-h" style="font-size:30px"></i>
       </button>
     </div>
   </div>
 </div>
-<table class="table table-bordered offset-md-5"id="matriceavncé">
-  <tr>
-    <td>Effectifs formes</td>
-    <td><input type="number" [(ngModel)]="effectifsFormes" class="styled-input"></td>
-  </tr>
-  <tr>
-    <td>Objectifs</td>
-    <td><input type="number" [(ngModel)]="objectifs" class="styled-input"></td>
-  </tr>
-  <tr>
-    <td>Besoin</td>
-    <td style="padding-left: 29px;">{{besoin}}</td>
-  </tr>
-</table>
-
-<div class="container-fluid">
+<mat-menu #menu="matMenu" class="custom-menu">
+  <mat-form-field>
+    <mat-label>Ligne</mat-label>
+    <mat-select (click)="$event.stopPropagation()" (selectionChange)="getOperatorByLigne($event)">
+      <mat-option *ngFor="let item of ligne" [value]="item.id">{{item.nomLigne}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Opération</mat-label>
+    <mat-select (click)="$event.stopPropagation()" (selectionChange)="getOperatorByOperation($event)">
+      <mat-option *ngFor="let item of originalOperation" [value]="item.id">{{item.operationName}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-menu-item>Close Menu</button>
+</mat-menu>
+<div class="container-fluid" *ngIf="affichebyLigne">
   <div class="row">
     <div class="col offset-md-2">
-      <div class="table-responsive">
+      <div class="table-responsive" style="max-height: 450px; overflow-y: auto;">
         <table class="table table-striped medium">
           <thead class="thead-light">
+            <tr>
+              <th scope="col" style="color: transparent;"></th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+              <th scope="col">Effectifs formés</th>
+              <th scope="col" *ngFor="let operation of Operations">{{ operation.effectifsformes }}</th>
+            </tr>
+            <tr>
+              <th scope="col" style="color: transparent;"></th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+              <th scope="col">Objectifs</th>
+              <th scope="col" *ngFor="let operation of Operations; let i=index">
+                <input type="number" [(ngModel)]="objectifs[i]" class="styled-input">
+              </th>
+            </tr>
+            <tr>
+              <th scope="col" style="color: transparent;"></th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+              <th scope="col">Besoin</th>
+              <th scope="col" *ngFor="let operation of Operations; let i=index">{{ operation.effectifsformes - objectifs[i] }}</th>
+            </tr>
             <tr>
               <th scope="col" style="color: transparent;">aaaa</th>
               <th scope="col"></th>
@@ -47,83 +70,169 @@
               <th scope="col">Nom Agent</th>
               <th scope="col">Ligne</th>
               <th scope="col">Qualification</th>
-              <th scope="col" *ngFor="let operation of Operations">{{ operation }}</th>
+              <th scope="col" *ngFor="let operation of Operations">{{ operation.operationName }}</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr *ngFor="let item of filtredoperators">
               <td></td>
               <td>
                 <div class="profil">
-                  <img src="assets/mounir.jpeg" alt="Profile Image">
+                  <img [src]="item.image" alt="Profile Image">
                 </div>
               </td>
-              <th scope="row">1</th>
-              <td class="centered">Mark</td>
-              <td>Otto</td>
-              <td>mdo</td>
-              <td>mdo</td>
-              <td>mdo</td>
-            </tr>
-            <tr>
+              <th scope="row">{{item.matriculeOperateur}}</th>
+              <td class="centered">{{item.nomOperateur}}</td>
+              <td>{{ item.assignments && item.assignments.length > 0 ? item.assignments[item.assignments.length - 1].nomLigne : '' }}</td>
               <td></td>
-              <td>
-                <div class="profil">
-                  <img src="assets/mounir.jpeg" alt="Profile Image">
-                </div>
+              <td *ngFor="let operation of Operations">
+                <span *ngFor="let evaluation of operation.evaluation">
+                  <span *ngIf="evaluation.idOperateur === item.id && evaluation.idOperation === operation.id" [style.color]="getColor(evaluation.evaluationTotal, item.creationDate)">
+                    {{ evaluation.evaluationTotal }}
+                  </span>
+                </span>
+                <hr style="margin: 5px 0;">
+                <span>{{ item.creationDate }}</span> <!-- Date -->
               </td>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>fat</td>
-              <td>mdo</td>
-              <td>mdo</td>
-            </tr>
-            <tr>
-              <td></td>
-              <td>
-                <div class="profil">
-                  <img src="assets/mounir.jpeg" alt="Profile Image">
-                </div>
-              </td>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>twitter</td>
-              <td>mdo</td>
-              
-            </tr>
-            <tr>
-              <td></td>
-              <td>
-                <div class="profil">
-                  <img src="assets/mounir.jpeg" alt="Profile Image">
-                </div>
-              </td>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>twitter</td>
-              <td>mdo</td>
-              
-            </tr>
-            <tr>
-              <td></td>
-              <td>
-                <div class="profil">
-                  <img src="assets/mounir.jpeg" alt="Profile Image">
-                </div>
-              </td>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>twitter</td>
-              <td>mdo</td>
-              
             </tr>
           </tbody>
         </table>
       </div>
     </div>
   </div>
+</div>
+
+
+
+
+
+<div class="container-fluid" *ngIf="affichebyoperateur">
+  <div class="row">
+    <div class="col offset-md-2">
+      <div class="table-responsive" style="max-height: 450px; overflow-y: auto;">
+        <table class="table table-striped medium">
+          <thead class="thead-light">
+            <tr>
+              <td></td>
+              <td></td>
+              <th scope="col">MAT Agent</th>
+              <th scope="col">Nom Agent</th>
+              <th scope="col">Ligne</th>
+              <th scope="col">Qualification</th>
+              <th scope="col">Operations</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of operators">
+              <td></td>
+              <td>
+                <div class="profil">
+                  <img [src]="item.image" alt="Profile Image">
+                </div>
+              </td>
+              <td>{{ item.matriculeOperateur }}</td>
+              <td>{{ item.nomOperateur }}</td>
+              <td>
+                <ng-container *ngFor="let assignment of item.assignments">
+                  {{ assignment.nomLigne }}
+                  <br> <!-- Ajout d'un saut de ligne pour la lisibilité -->
+                </ng-container>
+              </td>
+              <td>{{item.qualification}}</td>
+              <td>
+                <ng-container *ngFor="let operation of originalOperation">
+                  <ng-container *ngFor="let assignment of item.assignments; let i = index;">
+                    <div *ngIf="operation.idLigne == assignment.idLigne && (i === 0 || item.assignments[i - 1].idLigne !== assignment.idLigne)">
+                      <strong>{{ operation.operationName }}</strong>
+                      <span *ngFor="let evaluation of operation.evaluation">
+                        <span *ngIf="evaluation.idOperateur === item.id && evaluation.idOperation === operation.id">
+                          <span [style.color]="getColor(evaluation.evaluationTotal, item.creationDate)" style="margin-left: 5px;">
+                            {{ evaluation.evaluationTotal }}
+                          </span>
+                        </span>
+                      </span>
+                      <br> <!-- Adding a line break for readability -->
+                    </div>
+                  </ng-container>
+                </ng-container>
+                
+
+              </td>
+              <td>
+                <!-- Vous devez remplir cette colonne avec les données pertinentes selon votre logique -->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container-fluid" *ngIf="affichebyoperateur ==false && affichebyLigne== false">
+  <div class="row">
+    <div class="col offset-md-2">
+      <div class="table-responsive" style="max-height: 450px; overflow-y: auto;">
+        <table class="table table-striped medium">
+          <thead class="thead-light">
+            <tr>
+              <td></td>
+              <td></td>
+              <th scope="col">MAT Agent</th>
+              <th scope="col">Nom Agent</th>
+              <th scope="col">Ligne</th>
+              <th scope="col">Qualification</th>
+              <th scope="col">Operations</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of operators">
+              <td></td>
+              <td>
+                <div class="profil">
+                  <img [src]="item.image" alt="Profile Image">
+                </div>
+              </td>
+              <td>{{ item.matriculeOperateur }}</td>
+              <td>{{ item.nomOperateur }}</td>
+              <td>
+                <ng-container *ngFor="let assignment of item.assignments">
+                  <ng-container *ngIf="assignment.idOperation === selectedOperation">
+                    {{ assignment.nomLigne }}
+                    <br> <!-- Ajout d'un saut de ligne pour la lisibilité -->
+                  </ng-container>
+                </ng-container>
+              </td>
+              <td>{{ item.qualification }}</td>
+              <td>
+                <ng-container *ngFor="let operation of originalOperation">
+                  <ng-container *ngIf="operation.id === selectedOperation">
+                    <ng-container *ngFor="let assignment of item.assignments; let i = index;">
+                      <div *ngIf="operation.idLigne == assignment.idLigne && (i === 0 || item.assignments[i - 1].idLigne !== assignment.idLigne)">
+                        <strong>{{ operation.operationName }}</strong>
+                        <span *ngFor="let evaluation of operation.evaluation">
+                          <span *ngIf="evaluation.idOperateur === item.id && evaluation.idOperation === operation.id">
+                            <span [style.color]="getColor(evaluation.evaluationTotal, item.creationDate)" style="margin-left: 5px;">
+                              {{ evaluation.evaluationTotal }}
+                            </span>
+                          </span>
+                        </span>
+                        <br> <!-- Adding a line break for readability -->
+                      </div>
+                    </ng-container>
+                  </ng-container>
+                </ng-container>
+              </td>
+              <td>
+                <!-- Vous devez remplir cette colonne avec les données pertinentes selon votre logique -->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
 

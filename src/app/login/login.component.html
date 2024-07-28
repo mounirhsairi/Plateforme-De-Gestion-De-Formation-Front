@@ -1,0 +1,68 @@
+<!--<form class="login-form" [formGroup]="loginForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Username</mat-label>
+      <input matInput placeholder="Enter your username" formControlName="email">
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" placeholder="Enter your password" formControlName="password">
+    </mat-form-field>
+  
+    <button mat-raised-button color="primary" (click)="login()">Login</button>
+  </form>
+-->
+  <!--<div class="form-container sign-up-container">
+      <form [formGroup]="registrationForm">
+          <h1>Create Account</h1>
+          <input type="text" placeholder="Nom" formControlName="name" />
+          <input type="email" placeholder="Email"  formControlName="email"/>
+          <input type="password" placeholder="Password" formControlName="password" />
+          <input type="file" class="form-control" #fileInput  (change)="onFileSelected($event)">
+          <select  id=""class="form-select"  formControlName="roleName">
+            <option value="" [selected]="true" disabled>Role</option>
+            <option value="DirecteurUAP">DirecteurUAP</option>
+            <option value="DirecteurDesOperations">DirecteurDesOperations</option>
+            <option value="ResponssableUAP">ResponssableUAP</option>
+            <option value="ChefDeLigne">ChefDeLigne</option>
+            <option value="RH">RH</option>
+            <option value="AgentFormation">AgentFormation</option>
+            <option value="IngénieurQualité">IngénieurQualité</option>
+            <option value="TechnicienMaintenance">TechnicienMaintenance</option>
+            <option value="ADMIN">ADMIN</option>
+
+            
+
+          </select>
+          <button class="ghost"  id="signUp" (click)="registration()">Sign Up</button>
+      </form>
+  </div>-->
+  <!-- login.component.html -->
+<div class="background">
+  <div class="overlay">
+    <div class="form-container sign-in-container">
+      <form [formGroup]="loginForm">
+        <h1>Se Connecter</h1>
+        <input type="email" placeholder="Enter your username" formControlName="email" />
+        <input type="password" placeholder="Enter your password" formControlName="password" />
+        <button class="ghost" id="signIn" (click)="login()">Se Connecter</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+  <!--<div class="overlay-container">
+      <div class="overlay">
+          <div class="overlay-panel overlay-left">
+              <h1>Welcome Back!</h1>
+              <p>To keep connected with us please login with your personal info</p>
+              <button class="ghost" (click)="togglePanel(true)" >Sign In</button>
+          </div>
+          <div class="overlay-panel overlay-right">
+              <h1>Hello, Friend!</h1>
+              <p>Enter your personal details and start the journey with us</p>
+              <button class="ghost" (click)="togglePanel(false)" >Sign Up</button>
+          </div>
+      </div>
+  </div>
+</div>-->

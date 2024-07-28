@@ -1,0 +1,36 @@
+<h2 mat-dialog-title>Information sur la Demande</h2>
+<mat-dialog-content>
+
+    <div class="dialog-container">
+        <div class="row" style="cursor: pointer;">
+            <div class="label">Matricule:</div>
+            <div class="value">{{ demande.matriculeDemande }}</div>
+        </div>
+        <div class="row">
+            <div class="label">État:</div>
+            <div class="value">{{ demande.etat }}</div>
+        </div>
+        <div class="row">
+            <div class="label">ID:</div>
+            <div class="value">{{ demande.id }}</div>
+        </div>
+        <!-- Add other properties here -->
+        <div class="row" *ngFor="let item of demande.demandDataList">
+            <div class="label">Ligne Actuel:</div>
+            <div class="value">{{ item.nomLigneActuel }}</div>
+            <div class="label">Opérateur:</div>
+            <div class="value">{{ item.nomOperateur }}</div>
+            <div class="label">Nouvelle Ligne:</div>
+            <div class="value">{{ item.nomNouvelleLigne }}</div>
+            <div class="label">Nouvelle Opération:</div>
+            <div class="value">{{ item.nomNouvelleOperation }}</div>
+        </div>
+        
+    </div>
+    
+    
+    
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button [mat-dialog-close] style="margin: 0 auto;">Cancel</button>
+</mat-dialog-actions>

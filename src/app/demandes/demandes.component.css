@@ -1,0 +1,88 @@
+mat-slide-toggle{
+  margin-left: 45%;
+  margin-bottom:5%;
+}
+td,th{
+  text-align: center; 
+}.toggle-button {
+  position: relative;
+  display: inline-block;
+  width: 200px;
+  height: 34px;
+  background-color: #f0f0f0;
+  border-radius: 17px; /* Half of height for rounded corners */
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+  margin-left: 38%;
+  margin-bottom:5%;
+}
+
+.left-label, .right-label {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50%;
+  text-align: center;
+  font-size: 14px; /* Adjust font size */
+  font-weight: bold; /* Make labels bold */
+}
+
+.left-label {
+  left: 0;
+  color: #333; /* Adjust label color */
+}
+
+.right-label {
+  right: 0;
+  color: #333; /* Adjust label color */
+}
+
+.slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background-color: #2196F3;
+  border-radius: 17px; /* Match button's border-radius */
+  transition: 0.4s ease-in-out; /* Smooth transition */
+  opacity: 0.5;
+}
+
+.toggle-button:hover .slider {
+  background-color: #1e88e5; /* Darker color on hover */
+}
+
+.toggle-button.active .slider {
+  left: 50%;
+}
+.toggle-button.active .left-label {
+  color: #000000; /* Dim label color when active */
+}
+
+.toggle-button.active .right-label {
+  color: #000000; /* Brighten label color when active */
+}
+.custom-menu {
+  background-color: #fff; /* Change background color */
+  border-radius: 4px; /* Add border radius */
+  box-shadow: 0px 0px 10px rgba(219, 11, 11, 0.1); /* Add box shadow */
+}
+
+.select-field {
+  width: 100%; /* Set width to 100% */
+  margin-bottom: 10px; /* Add margin bottom between select fields */
+}
+
+.mat-option {
+  color: #35069c; /* Change option text color */
+}
+.menu-content {
+  padding: 16px; /* Add padding */
+  width: 200px; /* Set width */
+}
+mat-form-field{
+  padding: 20px;
+}
+

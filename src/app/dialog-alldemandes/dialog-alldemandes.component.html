@@ -1,0 +1,54 @@
+<h2 mat-dialog-title>Information sur la Demande</h2>
+<mat-dialog-content>
+    <div class="total-demandes">
+        Nombre total  : {{ totalNombre }}
+    </div>
+
+    <div class="dialog-container" *ngFor="let demande of demandeRecrutement">
+        <div class="row" style="cursor: pointer;" >
+            <div class="label">Matricule:</div>
+            <div class="value">{{ demande.matriculeDemande }}</div>
+        </div>
+        <div class="row">
+            <div class="label">État:</div>
+            <div class="value">{{ demande.etat }}</div>
+        </div>
+        <div class="row">
+            <div class="label">ID:</div>
+            <div class="value">{{ demande.nombre }}</div>
+        </div>
+    </div>
+    
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button [mat-dialog-close] style="margin: 0 auto;">Cancel</button>
+</mat-dialog-actions>
+
+<style>
+.dialog-container {
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    transition: box-shadow 0.3s ease;
+}
+.dialog-container:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.row {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+.label {
+    font-weight: bold;
+    color: #555;
+}
+.value {
+    color: #333;
+}
+mat-dialog-actions {
+    display: flex;
+    justify-content: center;
+}
+</style>

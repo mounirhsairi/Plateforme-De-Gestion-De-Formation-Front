@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>Evaluation par agent de formation</h1>
+
+<div (click)="openPdf()" style="color: blue;">Ouvrir Guide D'évaluation</div>
+<div mat-dialog-content>
+  <form [formGroup]="form">
+  <div class="mb-3">
+    <label for="nombre" class="form-label">Test ESD</label>
+    <input type="text" class="form-control" placeholder="Test ESD" formControlName="testESD" />
+</div><div class="mb-3">
+  <label for="nombre" class="form-label">Test formation de base</label>
+  <input type="text" class="form-control" placeholder="Test formation de base" formControlName="testFormationDeBase"  />
+</div><div class="mb-3">
+  <label for="nombre" class="form-label">Test environnement</label>
+  <input type="text" class="form-control" placeholder="Test environnement" formControlName="testEnvironnement" />
+</div>
+</form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="true" >Cancel</button>
+  <button mat-button [mat-dialog-close]="true" (click)="updateEvaluation()" cdkFocusInitial>OK</button>
+</div>

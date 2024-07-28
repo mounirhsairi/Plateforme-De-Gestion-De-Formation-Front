@@ -7,4 +7,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'pfeFront';
+
+  isLoggedIn(): boolean {
+    const expired = localStorage.getItem('expired');
+    //console.log(expired)
+    if (expired === "false") {
+        return true;
+    }
+    return false; // Assuming any other value means the user is logged in
+}
+
 }

@@ -42,13 +42,13 @@
 <div class="dropdown">
   <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <div class="profil">
-      <h1>Mounir Hsairi</h1>
-      <img src="assets/mounir.jpeg" alt="Profile Image">
-      </div>
+      <h1>{{name}}</h1>
+      <img [src]="imagesrc" alt="Profile Image">
+    </div>
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">Profil</a>
-    <a class="dropdown-item" href="#">Déconnexion</a>
+    <!--<a class="dropdown-item" href="#">Profil</a>-->
+    <a class="dropdown-item" href="#" (click)="logout()">Déconnexion</a>
   </div>
 </div>
 </nav>

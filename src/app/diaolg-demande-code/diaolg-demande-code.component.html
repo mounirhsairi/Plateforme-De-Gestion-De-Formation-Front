@@ -1,0 +1,14 @@
+<mat-dialog-content>
+  <!-- HTML code textarea -->
+  <textarea [(ngModel)]="htmlCode" (input)="updatePdfTemplate()" placeholder="Enter HTML code here..." rows="8" cols="50"></textarea>
+
+  <!-- PDF template content -->
+  <div class="pdf-template" id="pdfTemplate" [innerHTML]="renderedHtml"></div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="generatePDF()"type="submit" style="margin-left: 40%;">Generate PDF</button>
+
+</mat-dialog-actions>
+
+

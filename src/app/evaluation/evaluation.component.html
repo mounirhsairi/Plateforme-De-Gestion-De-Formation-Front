@@ -1,90 +1,73 @@
 <div class="container">
-    <div class="row">
-      <div class="col-md-4" style="margin-left: 15%;">
-        <h2 >Evaluation</h2>
-    </div>
-    <div class="col-md-2" style="margin-left: 28%">
-        <div class="input-group rounded" style="border: 1px solid #939597;">
-            <input type="text" class="form-control border-0" placeholder="Search" aria-label="Search" />
-            <span class="input-group-text px-1" style="background-color: rgb(255, 255, 255); border: none;">
-                <i class="fas fa-search" style="color:#939597;"></i>
-            </span>
-        </div>
-    </div>
-    
-      <div class="col">
-        <button class="btn">
-          <i class="fas fa-sliders-h"style="font-size:30px"></i>
-        </button>
-      </div>
-    </div>
+  <div class="row">
+    <div class="col-md-4" style="margin-left: 15%;">
+      <h2 >Evaluation</h2>
+  </div>
+  <div class="col-md-2" style="margin-left: 35%;">
+    <app-search-evaluation (searchResultsEvaluation)="onSearchResults($event)"></app-search-evaluation>
   </div>
   
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col offset-md-2">
-        <div class="table-responsive">
-          <table class="table table-striped medium">
-            <thead class="thead-light">
-              <tr>
-                <th scope="col" style="color: transparent;">aaaa</th>
-                <th scope="col"></th>
-                <th scope="col">MAT Foramtion</th>
-                <th scope="col">Type</th>
-                <th scope="col">MAT Agent</th>
-                <th scope="col" >Evaluation Par Agent Formation</th>
-                <th scope="col">Evaluation Par Chef de ligne</th>
-                <th scope="col">Evaluation Par ingénieur qualité</th>
-                <th scope="col">Evaluation Par maintenance</th>
-                <th scope="col">Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td></td>
-                <td>
-                  <div class="profil">
-                    <img src="assets/mounir.jpeg" alt="Profile Image">
-                  </div>
-                </td>
-                <th scope="row">1</th>
-                <td class="centered">Mark</td>
-                <td (click)="openDialog()"style="cursor:pointer">Otto</td>
-                <td>mdo</td>
-                <td>mdo</td>
-                <td>mdo</td>
-              </tr>
-              <tr>
-                <td></td>
-                <td>
-                  <div class="profil">
-                    <img src="assets/mounir.jpeg" alt="Profile Image">
-                  </div>
-                </td>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>fat</td>
-                <td>mdo</td>
-                <td>mdo</td>
-              </tr>
-              <tr>
-                <td></td>
-                <td>
-                  <div class="profil">
-                    <img src="assets/mounir.jpeg" alt="Profile Image">
-                  </div>
-                </td>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>twitter</td>
-                <td>mdo</td>
-                
-              </tr>
-            </tbody>
-          </table>
-        </div>
+    <div class="col">
+     <!--<button class="btn">
+        <i class="fas fa-sliders-h"style="font-size:30px"></i>
+      </button>--> 
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col offset-md-2">
+      <div class="table-responsive"style="max-height: 450px; overflow-y: auto;">
+        <table class="table table-striped medium">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col" style="color: transparent;">aaaa</th>
+              <th scope="col">MAT Formation</th>
+              <th scope="col">Type</th>
+              <th scope="col">Opération</th>
+              <th scope="col">MAT Agent</th>
+              <th scope="col" *ngIf="role == 'AgentFormation'">Evaluation Par Agent Formation</th>
+              <th scope="col"*ngIf="role == 'ChefDeLigne'">Evaluation Par Chef de ligne</th>
+              <th scope="col"*ngIf="role == 'IngénieurQualité'">Evaluation Par ingénieur qualité</th>
+              <th scope="col"*ngIf="role == 'TechnicienMaintenance'">Evaluation Par maintenance</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let item of evaluation">
+              <ng-container *ngIf="ligneIds?.includes(item.idLigne.toString())">
+                <tr>
+                  <td></td>
+                  <th scope="row">{{item.matriculeFormation}}</th>
+                  <td class="centered">{{item.typeFormation}}</td>
+                  <td class="centered">{{item.nomOperation}}</td>
+                  <td>{{item.matriculeOperateur}}</td>
+                  <td (click)="openDialog(item.id)" style="cursor:pointer" *ngIf="role == 'AgentFormation'">Percentage Result: {{ item.evaluationParAgentFormation }}%</td>
+                  <td (click)="openDialog1(item.id)" style="cursor:pointer"*ngIf="role == 'ChefDeLigne'">Percentage Result: {{ item.evaluationParChefDeLigne }}%</td>
+                  <td (click)="openDialog2(item.id)" style="cursor:pointer" *ngIf="role == 'IngénieurQualité'">Percentage Result: {{ item.evaluationParIngenieurQualite }}%</td>
+                  <ng-container *ngIf="role == 'TechnicienMaintenance'">
+                    <ng-container *ngIf="item.nomOperation.toUpperCase() == 'CONDUCTEUR'; else noTemplate">
+                      <td (click)="openDialog3(item.id)" style="cursor:pointer">
+                        Percentage Result: {{ item.evaluationParMaintenance }}%
+                      </td>
+                    </ng-container>
+                  </ng-container>
+                  <ng-template #noTemplate>
+                    <td>N'est pas conducteur</td>
+                  </ng-template>
+                  
+                  <td>{{item.evaluationTotal}}</td>
+                </tr>
+              </ng-container>
+            </ng-container>
+            
+          
+          
+            
+          </tbody>
+        </table>
       </div>
-    </div>  
-    
+    </div>
+  </div>  
+  

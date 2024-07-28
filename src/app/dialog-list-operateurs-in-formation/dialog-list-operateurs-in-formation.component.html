@@ -1,0 +1,54 @@
+<mat-dialog-content>
+  <form (change)="onFileSelected1($event)" *ngIf="role == 'RH'">
+    <div class="mb-4">
+        <label for="excelFile" class="form-label">Select Excel File</label>
+        <input type="file" class="form-control" id="excelFile">
+    </div>
+</form>
+    <div class="container-fluid">
+        <div class="row">
+          <div class="col ">
+            <div class="table-responsive">
+              <table class="table table-striped medium">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col" style="color: transparent;">aaaa</th>
+                    <th scope="col"></th>
+                    <th scope="col">MAT Agent</th>
+                    <th scope="col">Nom Agent</th>
+                    <th scope="col">Etat</th>
+                    <th scope="col">Téléphone</th>
+                    <th scope="col">Ligne</th>
+                    <th scope="col">Opération</th>
+                    <th scope="col">Date d'affectation</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of operatorList">
+                    <td></td>
+
+                    <td>
+                  <div class="profil">
+                    <img [src]="item.image" alt="Profile Image">
+                  </div>
+                </td>
+                <th scope="row">{{item.matriculeOperateur}}</th>
+                <td class="centered">{{item.nomOperateur}}</td>
+                <td>{{item.etat}}</td>
+                <td>{{item.telephone}}</td>
+                <td>{{item.assignments[item.assignments.length - 1].nomLigne}}</td>
+                <td >{{item.assignments[item.assignments.length - 1].operationName}}</td>
+                <td>{{item.creationDate}}</td> 
+                  </tr>
+                 
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>
+

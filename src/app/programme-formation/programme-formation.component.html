@@ -1,0 +1,176 @@
+
+<h2 mat-dialog-title>Ajouter un thème</h2>
+
+<mat-dialog-content>
+
+<form [formGroup]="firstFormGroup">
+  <div>
+    <label for="dateDebut" >Date :</label>
+    <input id="dateDebut"class="form-control" formControlName="dateDebut" type="date">
+  </div>
+  <div>
+    <label for="dateFin">Horaire:</label>
+    <input id="dateFin"class="form-control" formControlName="dateFin" type="text">
+  </div>
+  <div>
+    <label for="theme">Thème:</label>
+    <input id="theme"class="form-control" formControlName="theme">
+  </div>
+  <!--<div>
+    <label for="programme">Programme:</label>
+    <input id="programme" class="form-control" formControlName="programme">
+  </div>-->
+  <div>
+    <label for="type">Type:</label>
+    <input id="type" class="form-control" formControlName="type">
+  </div>
+  <div>
+    <label for="etat">État:</label>
+    <input id="etat" class="form-control" formControlName="etat">
+  </div>
+  <div>
+    <label for="duree">Durée:</label>
+    <input id="duree" class="form-control" formControlName="duree" type="number">
+  </div>
+  <div>
+    <label for="partie">Partie:</label>
+    <select name="" id="" formControlName="partie" class="form-select">
+      <option value="1">Intégration (Centre de formation)</option>
+      <option value="2">Formation spécifique au produit, adaptation au poste</option>
+    </select>
+  </div>
+  <div>
+    <label for="partie">Resp:</label>
+    <input id="partie" class="form-control" formControlName="resp">
+  </div>
+  <div>
+    <label for="partie">Doc:</label>
+    <input id="partie" class="form-control" formControlName="doc">
+  </div>
+</form>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button mat-dialog-close style="margin-left: 38%;color: blue;"(click)="createSesssion()" >Ajouter</button>
+
+</mat-dialog-actions>
+
+<!--<div class="container">
+    <h1>Programme de formation agent de déchet</h1>
+    
+    <h2>CANDIDAT</h2>
+    <form>
+      <div class="form-group">
+        <label for="name">Nom et Prénom</label>
+        <input type="text" id="name" class="form-control" [(ngModel)]="candidate.name" name="name">
+      </div>
+      <div class="form-group">
+        <label for="educationLevel">Niveau d’instruction</label>
+        <input type="text" id="educationLevel" class="form-control" [(ngModel)]="candidate.educationLevel" name="educationLevel">
+      </div>
+      <div class="form-group">
+        <label for="hireDate">Date d’embauche</label>
+        <input type="date" id="hireDate" class="form-control" [(ngModel)]="candidate.hireDate" name="hireDate">
+      </div>
+      <div class="form-group">
+        <label for="function">Fonction</label>
+        <input type="text" id="function" class="form-control" [(ngModel)]="candidate.function" name="function">
+      </div>
+      <div class="form-group">
+        <label for="assignment">Affectation</label>
+        <input type="text" id="assignment" class="form-control" [(ngModel)]="candidate.assignment" name="assignment">
+      </div>
+    </form>
+  
+    <h2>ENCADREMENT</h2>
+    <form>
+      <div class="form-group">
+        <label for="tutor">Tuteur</label>
+        <input type="text" id="tutor" class="form-control" [(ngModel)]="encadrement.tutor" name="tutor">
+      </div>
+      <div class="form-group">
+        <label for="trainingPeriod">Période de formation</label>
+        <input type="text" id="trainingPeriod" class="form-control" [(ngModel)]="encadrement.trainingPeriod" name="trainingPeriod">
+      </div>
+      <div class="form-group">
+        <label for="trainingDays">Nombre de jours</label>
+        <input type="number" id="trainingDays" class="form-control" [(ngModel)]="encadrement.trainingDays" name="trainingDays">
+      </div>
+    </form>
+  
+    <h2>Formation intégration</h2>
+    <button (click)="addintegration()">add</button>
+    <form>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Horaire</th>
+            <th>Durée</th>
+            <th>Thème</th>
+            <th>Programme</th>
+            <th>Type</th>
+            <th>Resp.</th>
+            <th>Doc.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of integration">
+            <td><input type="text" class="form-control" [(ngModel)]="item.date" name="date"></td>
+            <td><input type="text" class="form-control" [(ngModel)]="item.horaire" name="horaire"></td>
+            <td><input type="text" class="form-control" [(ngModel)]="item.duree" name="duree"></td>
+            <td>{{item.theme}}</td>
+            <td><input type="checkbox" [(ngModel)]="item.checked" name="checked"> {{item.program}}</td>
+            <td>{{item.type}}</td>
+            <td>{{item.responsable}}</td>
+            <td>{{item.document}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  
+    <h2>Formation technique adaptation au poste</h2>
+    <form>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Du</th>
+            <th>Au</th>
+            <th>Horaire</th>
+            <th>Durée</th>
+            <th>Thème</th>
+            <th>Programme</th>
+            <th>Type</th>
+            <th>Resp.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of technicalTraining">
+            <td><input type="text" class="form-control" [(ngModel)]="item.from" name="from"></td>
+            <td><input type="text" class="form-control" [(ngModel)]="item.to" name="to"></td>
+            <td>{{item.horaire}}</td>
+            <td>{{item.duree}}</td>
+            <td>{{item.theme}}</td>
+            <td><input type="checkbox" [(ngModel)]="item.checked" name="checked"> {{item.program}}</td>
+            <td>{{item.type}}</td>
+            <td>{{item.responsable}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  
+    <h2>Évaluation</h2>
+    <form>
+      <div class="form-group">
+        <label for="evaluation1">1ère Évaluation</label>
+        <textarea id="evaluation1" class="form-control" [(ngModel)]="evaluation.evaluation1" name="evaluation1"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="evaluation2">2ème Évaluation (si nécessaire)</label>
+        <textarea id="evaluation2" class="form-control" [(ngModel)]="evaluation.evaluation2" name="evaluation2"></textarea>
+      </div>
+    </form>
+  </div>
+  --->
+  

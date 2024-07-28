@@ -1,0 +1,186 @@
+<button (click)="generatePdf()">Save as PDF</button>
+
+<app-programformation-conducteur-machine ></app-programformation-conducteur-machine>
+
+
+<!--<div class="container">
+    <h1>Programme de formation de base conducteur machine CMS</h1>
+    
+    <section>
+      <h2>CANDIDAT</h2>
+      <div>
+        <label>Nom et Prénom:</label>
+        <input [(ngModel)]="candidate.name" type="text" placeholder="Nom et Prénom">
+      </div>
+      <div>
+        <label>Niveau d’instruction:</label>
+        <input [(ngModel)]="candidate.educationLevel" type="text" placeholder="Niveau d’instruction">
+      </div>
+      <div>
+        <label>Date d’embauche:</label>
+        <input [(ngModel)]="candidate.hireDate" type="date">
+      </div>
+      <div>
+        <label>Date de nouvelle affectation:</label>
+        <input [(ngModel)]="candidate.newAssignmentDate" type="date">
+      </div>
+      <div>
+        <label>Fonction:</label>
+        <input [(ngModel)]="candidate.function" type="text" placeholder="Fonction">
+      </div>
+      <div>
+        <label>Affectation:</label>
+        <input [(ngModel)]="candidate.assignment" type="text" placeholder="Affectation">
+      </div>
+    </section>
+  
+    <section>
+      <h2>ENCADREMENT</h2>
+      <div>
+        <label>Tuteur:</label>
+        <input [(ngModel)]="supervisor.tutor" type="text" placeholder="Tuteur">
+      </div>
+      <div>
+        <label>Période de formation:</label>
+        <span>Du <input [(ngModel)]="supervisor.trainingPeriodStart" type="date"> Au <input [(ngModel)]="supervisor.trainingPeriodEnd" type="date"></span>
+      </div>
+      <div>
+        <label>Nombre de jours:</label>
+        <input [(ngModel)]="supervisor.trainingDays" type="number" value="20" readonly>
+      </div>
+    </section>
+  
+    <section>
+      <h2>Intégration (Centre de formation)</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Horaire</th>
+            <th>Durée</th>
+            <th>Thème</th>
+            <th>Programme</th>
+            <th>Type</th>
+            <th>Resp.</th>
+            <th>Doc.</th>
+            <th>État</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of trainingItems">
+            <td>{{ item.date }}</td>
+            <td>{{ item.horaire }}</td>
+            <td>{{ item.duree }}</td>
+            <td>{{ item.theme }}</td>
+            <td>
+              <ul>
+                <li *ngFor="let task of item.programme">
+                  <input type="checkbox"> {{ task }}
+                </li>
+              </ul>
+            </td>
+            <td>{{ item.type }}</td>
+            <td>{{ item.resp }}</td>
+            <td>{{ item.doc }}</td>
+            <td>{{ item.etat }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  
+    <section>
+      <h2>Évaluation</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Performances évaluées</th>
+            <th>1ère Note (0-25%)</th>
+            <th>2ème Note (0-25%)</th>
+            <th>Commentaire des responsables : qualité/ production/ formation</th>
+            <th>Date</th>
+            <th>Visa</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Intégration Conscience des exigences environnementales et de sécurité</td>
+            <td><input type="number" min="0" max="25"></td>
+            <td><input type="number" min="0" max="25"></td>
+            <td><textarea></textarea></td>
+            <td><input type="date"></td>
+            <td><input type="text"></td>
+          </tr>
+          <tr>
+            <td>Documents techniques</td>
+            <td><input type="number" min="0" max="25"></td>
+            <td><input type="number" min="0" max="25"></td>
+            <td><textarea></textarea></td>
+            <td><input type="date"></td>
+            <td><input type="text"></td>
+          </tr>
+          <tr>
+            <td>Manipulation et maintenance du poste travail et remplissage des fiches de travail</td>
+            <td><input type="number" min="0" max="25"></td>
+            <td><input type="number" min="0" max="25"></td>
+            <td><textarea></textarea></td>
+            <td><input type="date"></td>
+            <td><input type="text"></td>
+          </tr>
+          <tr>
+            <td>Qualité du produit et remplissage des fiches de travail</td>
+            <td><input type="number" min="0" max="25"></td>
+            <td><input type="number" min="0" max="25"></td>
+            <td><textarea></textarea></td>
+            <td><input type="date"></td>
+            <td><input type="text"></td>
+          </tr>
+          <tr>
+            <td>Rendement et remplissage des fiches de travail</td>
+            <td><input type="number" min="0" max="25"></td>
+            <td><input type="number" min="0" max="25"></td>
+            <td><textarea></textarea></td>
+            <td><input type="date"></td>
+            <td><input type="text"></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  
+    <section>
+      <h2>Barème</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Niveau</th>
+            <th>Pourcentage</th>
+            <th>Signification</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Niveau 4</td>
+            <td>100%</td>
+            <td>Candidat qui a la maîtrise parfaite de l'activité (sait former une autre personne sous des critères)</td>
+          </tr>
+          <tr>
+            <td>Niveau 3</td>
+            <td>75%</td>
+            <td>Candidat sait faire son travail avec qualité avec le standard au temps de cycle</td>
+          </tr>
+          <tr>
+            <td>Niveau 2</td>
+            <td>50%</td>
+            <td>Candidat sait faire son travail avec qualité avec le standard et maîtrise sur son poste de travail</td>
+          </tr>
+          <tr>
+            <td>Niveau 1</td>
+            <td>25%</td>
+            <td>Candidat sait faire sous surveillance</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+  
+
+-->

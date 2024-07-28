@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Qualification</h2>
+<mat-dialog-content>
+  <form [formGroup]="UpdateQualification">
+    <div class="select-container">
+      <div class="select-wrapper">
+        <h3></h3>
+        <select class="form-select" formControlName="qualification" >
+          <option value="Qualifié">Qualifié</option>
+          <option value="Versatile">Versatile</option>
+          <option value="Universal">Universal</option>
+          <option value="Senior">Senior</option>
+
+        </select>
+      </div>
+      </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <!-- Button to cancel dialog -->
+  <button mat-button mat-dialog-close>Cancel</button>
+  <!-- Button to submit form -->
+  <button mat-button (click)="updateQualification()"mat-dialog-close>OK</button>
+</mat-dialog-actions>

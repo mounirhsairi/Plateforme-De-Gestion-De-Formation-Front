@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>Add Form Data</h2>
+<mat-dialog-content>
+  <form [formGroup]="UpdateOperation">
+    <div class="select-container">
+      <div class="select-wrapper">
+        <h3>Ligne</h3>
+        <select class="form-select" formControlName="idNouvelleLigne" (change)="getOperationByLigne($event)">
+          <option *ngFor="let item of ligne" [value]="item.id">{{item.nomLigne}}</option>
+        </select>
+      </div>
+      <div class="select-wrapper">
+        <h3>Nouvelle Opération</h3>
+        <select class="form-select" formControlName="idOperation">
+          <option value="" disabled selected>Choisissez une Opération</option>
+          <option *ngFor="let item of filtredoperations" [value]="item.id">{{item.operationName}}</option>
+        </select>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <!-- Button to cancel dialog -->
+  <button mat-button mat-dialog-close>Cancel</button>
+  <!-- Button to submit form -->
+  <button mat-button (click)="updateOperation()"mat-dialog-close>OK</button>
+</mat-dialog-actions>

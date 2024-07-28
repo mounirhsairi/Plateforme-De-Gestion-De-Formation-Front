@@ -1,0 +1,9 @@
+mat-radio-button{
+  margin: 16px;
+}
+select{
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+  padding: .390rem .75rem;
+  width: 100%;
+}

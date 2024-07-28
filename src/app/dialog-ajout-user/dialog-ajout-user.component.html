@@ -1,0 +1,55 @@
+<h2 mat-dialog-title>Modifier Un Utilisateur</h2>
+<mat-dialog-content>
+    <div class="container mt-5">
+        <form [formGroup]="registrationForm">
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nom</label>
+                <input type="text" class="form-control" placeholder="Nom" formControlName="name" />
+            </div>
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Email</label>
+                <input type="email" class="form-control" placeholder="Email"  formControlName="email"/>
+            </div>
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Password</label>
+                <input type="password" class="form-control" placeholder="Password" formControlName="password" />
+            </div>
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Image</label>
+                <input type="file" class="form-control" #fileInput  (change)="onFileSelected($event)">
+            </div>
+            <label>Role</label>
+            <select  id=""class="form-select"  formControlName="roleName">
+              <option value="" [selected]="true" disabled>Role</option>
+              <option value="DirecteurUAP">DirecteurUAP</option>
+              <option value="DirecteurDesOperations">DirecteurDesOperations</option>
+              <option value="ResponssableUAP">ResponssableUAP</option>
+              <option value="ChefDeLigne">ChefDeLigne</option>
+              <option value="RH">RH</option>
+              <option value="AgentFormation">AgentFormation</option>
+              <option value="IngénieurQualité">IngénieurQualité</option>
+              <option value="TechnicienMaintenance">TechnicienMaintenance</option>
+              <option value="ADMIN">ADMIN</option>
+  
+              
+  
+            </select>
+            <label>Lignes</label>
+            <select multiple class="form-select" formControlName="idLigne">
+                <option *ngFor="let ligne of lignes" [value]="ligne.id">{{ ligne.nomLigne }}</option>
+            </select>
+            
+            
+            
+          
+
+            
+            
+            <button mat-button type="submit" [mat-dialog-close]="true" class="btn btn-primary" style="margin-left: 45%;margin-top: 20px;" (click)="registration()">OK</button>
+        </form>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+
+</mat-dialog-actions>

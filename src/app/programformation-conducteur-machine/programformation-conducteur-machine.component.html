@@ -1,0 +1,363 @@
+
+<div class="col-md-4 offset-md-3">
+  <label for="department" class="form-label">Programme de formation</label>
+  <select class="form-select" id="department"  required  (change)="onChipClick($event)" >
+      <option value="">Select programme</option>
+      <option *ngFor="let item of programFormation"  [value]="item.id" >{{item.nom}} </option>
+      
+  </select>
+</div>
+
+<div class="container" >
+  <div class="content"  id="content" *ngIf="program1">
+  <h1 >{{program1.nom}}</h1>
+  
+  <table class="styled-table">
+    <thead>
+      <tr>
+        <th colspan="3">CANDIDAT</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Nom et Prénom:</td>
+        <td colspan="2">
+          <input type="text" [(ngModel)]="operateur.nomOperateur" placeholder="Nom et Prénom">
+        </td>
+      </tr>
+      <tr>
+        <td>Niveau d’instruction:</td>
+        <td colspan="2">
+          <input type="text" [(ngModel)]="operateur.niveauInstruction" placeholder="Niveau d’instruction">
+        </td>
+      </tr>
+      <tr>
+        <td>Date d’embauche:</td>
+        <td colspan="2">
+          <input type="date" [(ngModel)]="operateur.dateEmbauche">
+        </td>
+      </tr>
+      <tr>
+        <td>Date de nouvelle affectation:</td>
+        <td colspan="2">
+          <input type="date" [(ngModel)]="operateur.dateNouvelleAffectation">
+        </td>
+      </tr>
+      <tr>
+        <td>Fonction:</td>
+        <td colspan="2">
+          <input type="text" [(ngModel)]="operateur.fonction" placeholder="Fonction">
+        </td>
+      </tr>
+      <tr>
+        <td>Affectation:</td>
+        <td colspan="2">
+          <input type="text" [(ngModel)]="operateur.affectation" placeholder="Affectation">
+        </td>
+      </tr>
+      <tr>
+        <th colspan="3">ENCADREMENT</th>
+      </tr>
+      <tr>
+        <td>Tuteur:</td>
+        <td>………………………</td>
+        <td rowspan="2">
+          <table class="inner-table">
+            <tr>
+              <td>Période de formation</td>
+              <td>Du <input type="date"> Au <input type="date"></td>
+            </tr>
+            <tr>
+              <td>Nombre de jours</td>
+              <td>20 jours</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>Fonction:</td>
+        <td>………………………</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <section *ngIf="nomProgram =='Programme de formation de base Injection plastique'" >
+    <table >
+      <thead>
+          <tr class="row-to-print">
+              <th>Cocher l’opération nécessaire</th>
+              
+          </tr>
+      </thead>
+      <tbody>
+          <tr class="row-to-print">
+              <td><input type="checkbox">Injection automatique</td>
+              <td><input type="checkbox">Sablage</td>
+              <td><input type="checkbox">Découpage</td>
+              <td><input type="checkbox">Pesage & Emballage</td>
+              <td><input type="checkbox">Montage moule</td>
+          </tr>
+          <tr class="row-to-print">
+              <td><input type="checkbox">Injection manuelle</td>
+              <td><input type="checkbox">Pesage</td>
+              <td><input type="checkbox">Contrôle qualité visuel</td>
+              <td><input type="checkbox">Manipulation matières vierge</td>
+              <td><input type="checkbox">Manipulation matières broyée</td>
+          </tr>
+      </tbody>
+  </table>
+  
+  
+  </section>
+
+  <button (click)="openDialog()">Ajouter un théme</button>
+  <section>
+    <h2>Intégration (Centre de formation)</h2>
+    <table>
+      <thead>
+        <tr class="row-to-print">
+          <th>Date</th>
+          <th>Horaire</th>
+          <th>Durée</th>
+          <th>Thème</th>
+          <th>Programme</th>
+          <th>Type</th>
+          <th>Resp.</th>
+          <th>Doc.</th>
+          <th>État</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let session of program1.sessionFormation" class="row-to-print">
+          <ng-container *ngIf="session.partie== '1'">
+            <td><input type="date" [(ngModel)]="session.dateDebut"></td>
+            <td><input type="text" [(ngModel)]="session.dateFin"></td>
+          <td>{{session.duree}} j</td>
+          <td>{{session.theme}} <i *ngIf="add" class="fas fa-times" style="margin-left: 5px;cursor: pointer;"(click)="deletesession(session.id)"></i></td>
+          <td>
+            <ul>
+              <li *ngFor="let programme of programsBySession[session.id]"><input type="checkbox">{{programme.element}}<i class="fas fa-times" style="margin-left: 5px;cursor: pointer;"(click)="deleteprogramme(programme.id)" *ngIf="add"></i></li>
+             
+            </ul>
+            <input type="text" [(ngModel)]="inputValue" placeholder="Enter a value"*ngIf="add">  
+            <button (click)="addtosession(session.id, inputValue)" *ngIf="add">Add</button>
+          </td>
+          <td>{{session.type}}</td>
+          <td>{{session.resp}}</td>
+          <td>{{session.doc}}</td>
+          <td>{{session.etat}}</td>
+        </ng-container>
+        </tr>
+      </tbody>
+      </table>
+
+      <h2>Formation spécifique au produit, adaptation au poste ; Cocher la formation nécessaire</h2>
+      <table>
+        <tbody>
+          <tr *ngFor="let session of program1.sessionFormation" class="row-to-print">
+
+          <ng-container *ngIf="session.partie== '2'">
+            <td><input type="date" [(ngModel)]="session.dateDebut"></td>
+            <td><input type="text" [(ngModel)]="session.dateFin"></td>
+            <td>{{session.duree}} j</td>
+            <td>{{session.theme}} <i *ngIf="add" class="fas fa-times" style="margin-left: 5px;cursor: pointer;"(click)="deletesession(session.id)"></i></td>
+            <td>
+              <ul>
+                <li *ngFor="let programme of programsBySession[session.id]"><input type="checkbox" >{{programme.element}}<i *ngIf="add" class="fas fa-times" style="margin-left: 5px;cursor: pointer;"(click)="deleteprogramme(programme.id)"></i>
+                </li>
+                
+              </ul>
+              <input type="text" [(ngModel)]="inputValue" placeholder="Enter a value" *ngIf="add">  
+              <button (click)="addtosession(session.id, inputValue)" *ngIf="add">Add</button>
+
+            </td>
+            <td>{{session.type}}</td>
+            <td>{{session.resp}}</td>
+            <td>{{session.doc}}</td>
+            <td>{{session.etat}}</td>
+          </ng-container>
+      </tr>
+        
+        
+        
+        
+        
+      
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <table border="1">
+      <thead>
+          <tr class="row-to-print">
+              <th>Circuit</th>
+              <th>Nom et Prénom</th>
+              <th>Visa</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr class="row-to-print">
+              <td>Agent de formation</td>
+              <td><input type="text"></td>
+              <td></td>
+          </tr>
+          <tr class="row-to-print">
+              <td>Chef hiérarchique</td>
+              <td><input type="text"></td>
+              <td><input type="text"></td>
+          </tr>
+          <tr class="row-to-print">
+              <td>Gestionnaire RH</td>
+              <td><input type="text"></td>
+              <td><input type="text"></td>
+          </tr>
+      </tbody>
+  </table>
+  
+  <p><b>Décision sur le suivi du produit</b></p>
+  <ul>
+    <li>
+      <input type="checkbox"> Suivi par opérateur qualifiant 100% :
+      <select (change)="getoperationByLigne($event)">
+        <option *ngFor="let ligne of lignes" [value]="ligne.id">{{ ligne.nomLigne }}</option>
+      </select>
+      <select (change)="getOperateursByOperations($event)">
+        <option *ngFor="let operation of operation" [value]="operation.id">{{ operation.operationName }}</option>
+      </select>
+      <select>
+        <option *ngFor="let item of filtered" [value]="item.id">{{ item.nomOperateur }}</option>
+      </select>
+    </li>
+          <li style="display: flex;"><input type="checkbox"> Suivi par responsable ligne et agent qualité : <input style="width: 10%;" type="text" placeholder="........................"></li>
+      <li style="display: flex;"><input type="checkbox"> Suivi par ingénieur process. (Dans un cas d’un nouveau projet) : <input style="width: 10%;" type="text" placeholder="........................"></li>
+  </ul>
+  
+  <table class="tabledecision" >
+      <thead>
+          <tr class="row-to-print">
+              <th>Circuit</th>
+              <th>Nom et Prénom</th>
+              <th>Date</th>
+              <th>Visa</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr class="row-to-print">
+              <td>Ingénieur qualité</td>
+              <td><input type="text"></td>
+              <td><input type="date"></td>
+              <td><input type="text"></td>
+          </tr>
+          <tr class="row-to-print">
+              <td>Chef hiérarchique</td>
+              <td><input type="text"></td>
+              <td><input type="date"></td>
+              <td><input type="text"></td>
+          </tr>
+      </tbody>
+  </table>
+  
+  <p><b>N.B :</b></p>
+  <p>1) Ce programme est flexible et se déroule selon la disponibilité des formateurs et des postes de travail.<br>
+  2) Une réunion se tiendra entre qualité/ Production/ Formation pour décider du mode de suivi du produit.<br>
+  3) Le temps libre en dehors des heures de formation planifiées sera consacré à la formation au poste d’affectation.</p>
+  
+  </section>
+
+  <section class="evaluation">
+    <h2>Évaluation</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Performances évaluées</th>
+          <th>1ère Note (0-25%)</th>
+          <th>2ème Note (0-25%)</th>
+          <th>Commentaire des responsables : qualité/ production/ formation</th>
+          <th>Date</th>
+          <th>Visa</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Intégration Conscience des exigences environnementales et de sécurité</td>
+          <td><input type="number" min="0" max="25"></td>
+          <td><input type="number" min="0" max="25"></td>
+          <td><textarea></textarea></td>
+          <td><input type="date"></td>
+          <td><input type="text"></td>
+        </tr>
+        <tr>
+          <td>Documents techniques</td>
+          <td><input type="number" min="0" max="25"></td>
+          <td><input type="number" min="0" max="25"></td>
+          <td><textarea></textarea></td>
+          <td><input type="date"></td>
+          <td><input type="text"></td>
+        </tr>
+        <tr>
+          <td>Manipulation et maintenance du poste travail et remplissage des fiches de travail</td>
+          <td><input type="number" min="0" max="25"></td>
+          <td><input type="number" min="0" max="25"></td>
+          <td><textarea></textarea></td>
+          <td><input type="date"></td>
+          <td><input type="text"></td>
+        </tr>
+        <tr>
+          <td>Qualité du produit et remplissage des fiches de travail</td>
+          <td><input type="number" min="0" max="25"></td>
+          <td><input type="number" min="0" max="25"></td>
+          <td><textarea></textarea></td>
+          <td><input type="date"></td>
+          <td><input type="text"></td>
+        </tr>
+        <tr>
+          <td>Rendement et remplissage des fiches de travail</td>
+          <td><input type="number" min="0" max="25"></td>
+          <td><input type="number" min="0" max="25"></td>
+          <td><textarea></textarea></td>
+          <td><input type="date"></td>
+          <td><input type="text"></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="bareme">
+    <h2>Barème</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Niveau</th>
+          <th>Pourcentage</th>
+          <th>Signification</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Niveau 4</td>
+          <td>100%</td>
+          <td>Candidat qui a la maîtrise parfaite de l'activité (sait former une autre personne sous des critères)</td>
+        </tr>
+        <tr>
+          <td>Niveau 3</td>
+          <td>75%</td>
+          <td>Candidat sait faire son travail avec qualité avec le standard au temps de cycle</td>
+        </tr>
+        <tr>
+          <td>Niveau 2</td>
+          <td>50%</td>
+          <td>Candidat sait faire son travail avec qualité avec le standard et maîtrise sur son poste de travail</td>
+        </tr>
+        <tr>
+          <td>Niveau 1</td>
+          <td>25%</td>
+          <td>Candidat sait faire sous surveillance</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</div>
+</div>
+
+<button (click)="generatePdf()">Enregistrer comme PDF</button>

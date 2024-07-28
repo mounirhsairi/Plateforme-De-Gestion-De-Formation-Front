@@ -1,0 +1,27 @@
+<div class="container" id="container">
+    <div class="form-container sign-up-container">
+        <form [formGroup]="registrationForm">
+            <h1>Create Account</h1>
+            <input type="text" placeholder="Nom" formControlName="name" />
+            <input type="email" placeholder="Email"  formControlName="email"/>
+            <input type="password" placeholder="Password" formControlName="password" />
+            <input type="file" class="form-control" #fileInput  (change)="onFileSelected($event)">
+            <select  id=""class="form-select"  formControlName="roleName">
+              <option value="" [selected]="true" disabled>Role</option>
+              <option value="DirecteurUAP">DirecteurUAP</option>
+              <option value="DirecteurDesOperations">DirecteurDesOperations</option>
+              <option value="ResponssableUAP">ResponssableUAP</option>
+              <option value="ChefDeLigne">ChefDeLigne</option>
+              <option value="RH">RH</option>
+              <option value="AgentFormation">AgentFormation</option>
+              <option value="IngénieurQualité">IngénieurQualité</option>
+              <option value="TechnicienMaintenance">TechnicienMaintenance</option>
+              <option value="ADMIN">ADMIN</option>
+  
+              
+  
+            </select>
+            <button class="ghost"  id="signUp" (click)="registration()">Sign Up</button>
+        </form>
+    </div>
+</div>

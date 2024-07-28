@@ -1,0 +1,114 @@
+<h2 mat-dialog-title>Add Form Data</h2>
+<mat-dialog-content>
+  <form [formGroup]="firstFormGroup" >
+    
+    <div class="mb-3">
+      <h3>Ligne Actuelle</h3>
+      <select class="form-select" formControlName="idLigneActuel" (change)="getOperatorByLigne($event)">
+        <option value="null" [selected]="true" disabled>Choisissez une ligne</option>
+        <option *ngFor="let item of ligne" value="{{item.id}}">{{item.nomLigne}}</option>
+
+      </select>
+
+      
+      <h3>Operateur</h3>
+      <select class="form-select" formControlName="idOperateur">
+        <option value="null" [selected]="true" disabled>Choisissez un Operateur</option>
+        <option *ngFor="let item of filtredoperators" value="{{item.id}}">{{item.nomOperateur}}</option>
+      </select>
+      <h2>Formation</h2>
+
+      <div class="select-container">
+        <div class="select-wrapper">
+          <h3>Ligne Affectée</h3>
+          <select class="form-select" formControlName="idNouvelleLigne" (change)="getOperationByLigne($event)">
+            <option *ngFor="let item of ligne" value="{{item.id}}">{{item.nomLigne}}</option>
+          </select>
+        </div>
+        <div class="select-wrapper" >
+          <h3>Nouvelle Opération</h3>
+          <select class="form-select" formControlName="idNouvelleOperation">
+            <option value="" [selected]="true" disabled>Choisissez une Opération</option>
+            <option *ngFor="let item of filtredoperations" value="{{item.id}}">{{item.operationName}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="formation-container">
+        <div class="wrapper">
+      <h3>Delai Limite de Formation</h3>
+      <input type="date" name="date" id="date" formControlName="delaiLimite">
+    </div>
+    <div class="wrapper">
+      <h3>Cause de la Formation</h3>
+      <textarea name="cause" id="cause" cols="40" rows="5" formControlName="cause"></textarea>
+    </div>
+    </div>
+    <h2>Objectifs</h2>
+            <mat-radio-group formControlName="Objectifs" aria-label="Select an option">
+                <mat-radio-button value="Qualification">Qualification</mat-radio-button>
+                <mat-radio-button value="Polyvalence">Polyvalence</mat-radio-button>
+                <mat-radio-button value="Reclamation">Reclamation</mat-radio-button>
+                <mat-radio-button value="Rappel">Rappel</mat-radio-button>
+                <mat-radio-button value="Requalification">Requalification</mat-radio-button>
+
+              </mat-radio-group>
+  </div>
+    <!-- Button to add dynamic inputs -->
+    <button mat-raised-button color="primary" (click)="addInput()">Add Input</button>
+    
+    <!--<button mat-button  [mat-dialog-close]="true" class="btn btn-primary" style="margin-left: 15%;margin-bottom: 20px;"(click)="CreateDemandePolyvalence()">Enregistrer</button>
+    <button mat-button  [mat-dialog-close]="true" class="btn btn-primary" style="margin-left: 5%;"(click)="CreateDemandePolyvalence()">Enregistrer et Envoyer</button>
+    <button mat-button  [mat-dialog-close]="true" class="btn btn-primary" style="margin-left: 5%;">Supprimer</button>
+    -->
+  </form>
+  
+  <!--<textarea cols="80" rows="10">{{ secondFormGroup.value | json }}</textarea>-->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <div class="table-responsive" style="max-height: 450px; overflow-y: auto;">
+          <table class="table table-striped medium">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col" class="custom-th">idLigneActuel</th>
+                <th scope="col" class="custom-th">idOperateur</th>
+                <th scope="col" class="custom-th">idNouvelleLigne</th>
+                <th scope="col" class="custom-th">idNouvelleOperation</th>
+                <th scope="col" class="custom-th">Objectifs</th>
+                <th scope="col" class="custom-th">Type</th>
+                <th scope="col" class="custom-th">Delai Limite</th>
+                <th scope="col" class="custom-th">Cause</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of demandDataList.controls">
+                <td>{{item.value.idLigneActuel}}</td>
+                <td>{{item.value.idOperateur}}</td>
+                <td>{{item.value.idNouvelleLigne}}</td>
+                <td>{{item.value.idNouvelleOperation}}</td>
+                <td>{{item.value.Objectifs}}</td>
+                <td>{{item.value.type}}</td>
+                <td>{{item.value.delaiLimite}}</td>
+                <td>{{item.value.cause}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button mat-button  [mat-dialog-close]="true" class="btn btn-primary" style="margin-left: 20%;"(click)="JustCreateDemandePolyvalence('En_Attente')">Enregistrer</button>
+  <button mat-button  [mat-dialog-close]="true" class="btn btn-primary" style="margin-left: 5%;"(click)="CreateDemandePolyvalence('Envoyé_Vers_RUAP')">Enregistrer et Envoyer</button>
+  <button mat-button  [mat-dialog-close]="true" class="btn btn-primary" style="margin-left: 5%;">Supprimer</button>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <!-- Button to cancel dialog -->
+  <!-- <button mat-button mat-dialog-close>Cancel</button>-->
+  <!-- Button to submit form -->
+  
+ <!-- <button mat-button [mat-dialog-close]="true" cdkFocusInitial class="btn btn-primary" type="submit" style="margin-left: 40%;" (click)="CreateDemandePolyvalence()">OK</button>-->
+</mat-dialog-actions>
+
+
+

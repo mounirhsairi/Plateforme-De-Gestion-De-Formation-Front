@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Qualité</h1>
+<div mat-dialog-content>
+  <div (click)="openPdf()" style="color: blue;">Ouvrir Guide D'évaluation</div>
+
+ <!-- <mat-checkbox *ngFor="let checkbox of data.checkboxData; let i = index" [(ngModel)]="checkbox.checked">
+     <mat-option>{{checkbox.value }} ({{ checkbox.percentage }}%)</mat-option>
+  </mat-checkbox>-->
+  
+    <div class="mb-3">
+      <label for="nombre" class="form-label">Qualié</label>
+      <input type="text" class="form-control" placeholder="Qualié" [(ngModel)]="qualite"  />
+    </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" (click)="updateEvaluation()" cdkFocusInitial>OK</button>
+</div>

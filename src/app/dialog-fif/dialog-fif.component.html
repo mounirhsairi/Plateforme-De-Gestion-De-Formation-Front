@@ -1,0 +1,199 @@
+    <div class="btn btn-toggle" (click)="toggleForm()" style="margin-bottom: 30px;">Toggle Form</div>
+    <div class="btn btn-toggle" (click)="toggleForm1()" style="margin-bottom: 30px;">Programme de formation</div>
+
+<div mat-dialog-content >
+<div *ngIf="operateur && showfile && !programFormation">
+
+<h2>Nom Opérateur : {{operateur.nomOperateur}}</h2>
+<h2>Matricule Opérateur: {{operateur.matriculeOperateur}}</h2>
+  <div class="container-fluid" >
+    <div class="row">
+      <div class="col ">
+        <div class="table-responsive"style="max-height: 450px; overflow-y: auto;">
+          <table class="table table-striped medium">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col" style="color: transparent;">aaaa</th>
+                <th scope="col"></th>
+                <th scope="col">Date</th>
+                <th scope="col">Affectation</th>
+                <th scope="col">Chaine</th>
+                <th scope="col">Opération</th>
+                <th scope="col">Méthode de suivi</th>
+                <th scope="col">Code de formation</th>
+                <th scope="col">Documents (Identification) </th>
+                <th scope="col">Production(0%-50%)</th>
+                <th scope="col">Qualité(0%-25%)</th>
+                <th scope="col">Evalution R&R(Pour les poste avec contrôlevisuel)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let assignement of operateur.assignments">
+                <td></td>
+                <td>
+                 
+                </td>
+                
+                <th scope="row">{{assignement.creationDate}}</th>
+                <td class="centered">{{operateur.creationDate}}</td>
+                <td>{{assignement.nomLigne}}</td>
+                <td>{{assignement.operationName}}</td>
+                <td >
+                  {{assignement.methodeSuivi}}
+                  <input type="text" [(ngModel)]="assignement.methodeSuivi" *ngIf="role == 'AgentFormation'">  
+                  <button (click)="methodeSuivie(assignement.id,assignement.methodeSuivi.toString())" *ngIf="role == 'AgentFormation'">ok</button>
+
+                              </td>
+                 <td>{{assignement.codeFormation}}
+                  <input type="text" [(ngModel)]="assignement.codeFormation"*ngIf="role == 'AgentFormation'">
+                  <button (click)="CodeFormation(assignement.id,assignement.codeFormation.toString())"*ngIf="role == 'AgentFormation'">ok</button>
+  
+                </td>
+
+                 <td>{{assignement.documentIdentification}}
+                  <input type="text" [(ngModel)]="assignement.documentIdentification"*ngIf="role == 'AgentFormation'">  
+
+                  <button (click)="Document(assignement.id,assignement.documentIdentification.toString())"*ngIf="role == 'AgentFormation'">ok</button>
+
+                </td>
+
+                 <td>
+                  <ng-container *ngFor="let evaluation of assignement.evaluation">
+                  <ng-container *ngIf="assignement.idOperation == evaluation.idOperation ">
+
+                    {{evaluation.evaluationParChefDeLigne}}
+                  </ng-container>
+
+                </ng-container></td>
+
+                 <td class="centered"><ng-container *ngFor="let evaluation of assignement.evaluation">
+                  <ng-container *ngIf="assignement.idOperation == evaluation.idOperation ">
+
+                    {{evaluation.evaluationParIngenieurQualite}}
+                  </ng-container>
+
+                </ng-container></td>
+                <td class="centered"><ng-container *ngFor="let evaluation of assignement.evaluation">
+                  <ng-container *ngIf="assignement.idOperation == evaluation.idOperation ">
+
+                    {{evaluation.evaluationParMaintenanceRAndR}}
+                    <input type="text" [(ngModel)]="evaluation.evaluationParMaintenanceRAndR"*ngIf="role == 'AgentFormation'">  
+                    <button (click)="updateevaluationRR(evaluation.id,evaluation.evaluationParMaintenanceRAndR.toString())"*ngIf="role == 'AgentFormation'">ok</button>
+                  </ng-container>
+
+                </ng-container></td>
+
+                   </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      </div>
+    </div>
+   </div>
+<div *ngIf="!showfile && !programFormation" style="display: flex;">
+<div *ngFor="let path of pdfPaths" style="margin-left: 10px;" >
+  <iframe [src]="getSafeUrl(path)" frameborder="0"  height="400"></iframe>
+  <button (click)="openPdfInNewTab(path)" class="open-pdf-button">Open PDF</button>
+
+</div> 
+</div>
+<app-programformation-conducteur-machine [operateur]="operateur" *ngIf="programFormation" [add]="add"></app-programformation-conducteur-machine>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]>Fermer</button>
+  
+</div>  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<div  style="display: flex; flex-wrap: wrap;" *ngIf="file">
+      <form action="" *ngIf="role == 'RH'">
+      <div class="mb-5">
+        <label for="image" class="form-label">File</label>
+        <input type="file" class="form-control" #fileInput (change)="onFileSelected($event)">
+      </div>
+    </form>
+      <div *ngIf="files && files.length > 0">
+        <div *ngFor="let item of files">
+          <div style="cursor: pointer;">
+            {{ item.fileName }}
+          </div>
+          <div>
+            
+            <iframe [src]="getSafeUrl(item.data)" frameborder="2" height="400" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!files || files.length === 0">
+        No files available.
+      </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]>Fermer</button>
+  </div>-->
+<!--<form (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+  <input type="file" name="file" #fileInput>
+  <br><br>
+  <button type="submit">Upload</button>
+</form>
+-->
+<!-- file-upload.component.html -->
+<!--<input type="file" (change)="onPdfFileSelected($event)" />
+<button (click)="onUpload()">Upload File</button>
+-->
+
+
+
+
+
+<!--<form action="" *ngIf="role == 'RH'">
+  <div class="mb-5">
+    <label for="image" class="form-label">File</label>
+    <input type="file" class="form-control" #fileInput (change)="onFileSelected($event)">
+  </div>
+</form>-->
+<!--<form [formGroup]="BesoinPersonnel" >
+
+<select multiple class="form-select" formControlName="Code" style="height: 200px; margin-top: 10px;">
+  <option  value=1>Document de Travail (IT, plan de travail, schéma)</option>
+  <option  value=2>Organisation et Manipulation sur poste de travail</option>
+  <option  value=3>Plan de réglage	</option>
+  <option  value=4>Instruction de sécurité/Environnement spécifique au poste de travail</option>
+  <option  value=5>Manipulation des composants ESD et comportement adéquat	</option>				
+  <option  value=6>Instruction AUW MD0017945	</option>
+  <option  value=7>Affichage spécifique à la chaine, indicateurs de performance</option>
+  <option  value=8>Validation du processus de fabrication, méthodes appliquées et raisons de le faire</option>
+  <option  value=9>Lavage et conditionnement</option>
+  <option  value=10>  Formation produit, utilisation chez le client</option>
+  <option  value=11>Exigence client relative au produit, défaut et effet chez le client</option>
+  <option  value=12>Carte de contrôle et suivi (enregistrement qualité)</option>
+  <option  value=13>IC/ codage de défaut/ CSD</option>
+  <option  value=14>Echantillons de contrôle/ de référence</option>
+  <option  value=15>Soudure manuelle selon la norme IPC 610 actuelle (Théorique & Pratique)</option>
+  <option  value=16>Echantillon de suivi du poste de contrôle (Fertigungsmuster)</option>
+  <option  value=17>Mesure sertissage (Si nécessaire)</option>
+  <option  value=18>PPM interne</option>
+  <option  value=19>Validation des processus et contrôle. à faire </option>
+  <option  value=20>Caractéristique spécials ( Si existe)</option>
+  <option  value=21>Gestion d’escalade.</option>
+
+  <option  value=22>  Procédure MD0018008 contrôle des produits non conforme :( gestion des produits non conforme,les produits suspects,les produits tombés par terre).</option>
+  <option  value=23>Evaluation R&R des opératrices</option>
+
+
+</select>
+<button mat-button   class="btn btn-primary" style="margin-left: 25%;"(click)="CodeFormation(1)">Enregistrer</button>
+
+</form>-->
