@@ -232,7 +232,13 @@
           <li style="display: flex;"><input type="checkbox"> Suivi par responsable ligne et agent qualité : <input style="width: 10%;" type="text" placeholder="........................"></li>
       <li style="display: flex;"><input type="checkbox"> Suivi par ingénieur process. (Dans un cas d’un nouveau projet) : <input style="width: 10%;" type="text" placeholder="........................"></li>
   </ul>
+  <label>Formation</label>
+  <select (change)="onFormationChange($event)">
+    <option *ngFor="let formation of formations" [value]="formation.id">{{ formation.matriculeFormation }}</option>
+  </select>
   
+
+
   <table class="tabledecision" >
       <thead>
           <tr class="row-to-print">
@@ -245,15 +251,15 @@
       <tbody>
           <tr class="row-to-print">
               <td>Ingénieur qualité</td>
-              <td><input type="text"></td>
+              <td><input type="text">{{modifiedByIngenieurQualite}}</td>
               <td><input type="date"></td>
-              <td><input type="text"></td>
+              <td><input type="text">{{messageQualite}}</td>
           </tr>
           <tr class="row-to-print">
               <td>Chef hiérarchique</td>
-              <td><input type="text"></td>
+              <td><input type="text">{{modifiedByChefDeLigne}}</td>
               <td><input type="date"></td>
-              <td><input type="text"></td>
+              <td><input type="text">{{messageProd}}</td>
           </tr>
       </tbody>
   </table>

@@ -13,5 +13,7 @@ export interface Evaluation{
     matriculeOperateur:string,
     idLigne:number,
     nomOperation:string,
-    nomOperateur:string
+    nomOperateur:string,
+    modifiedByIngenieurQualite:string,
+    modifiedByChefDeLigne:string
 }

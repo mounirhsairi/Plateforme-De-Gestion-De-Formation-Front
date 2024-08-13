@@ -20,6 +20,7 @@ export class DialogAlldemandesComponent implements OnInit {
   getAllDemandeRecrutement() {
     this.demandeService.getAllDemandeRecrutement().subscribe((data) => {
       this.demandeRecrutement = data as demandeRecrutement[];
+      this.demandeRecrutement =this.demandeRecrutement.filter(demande => demande.etat === 'VALIDER_PAR_DIRECTEUR_OPERATIONS')
       this.calculateTotalNombre();
       console.log(this.demandeRecrutement);
     });

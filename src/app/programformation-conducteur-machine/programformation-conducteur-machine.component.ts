@@ -12,6 +12,8 @@ import { OperationServiceService } from '../Service/operation-service.service';
 import { Operation } from '../model/operation.model';
 import { OperateurServiceService } from '../Service/operateur-service.service';
 import { Operator } from '../model/operator.model';
+import { FormationService } from '../Service/formation.service';
+import { Formation } from '../model/formation.model';
 
 @Component({
   selector: 'app-programformation-conducteur-machine',
@@ -19,13 +21,17 @@ import { Operator } from '../model/operator.model';
   styleUrls: ['./programformation-conducteur-machine.component.css']
 })
 export class ProgramformationConducteurMachineComponent implements OnInit {
-  
+  messageProd:string='';
+  messageQualite:string='';
+  modifiedByIngenieurQualite:string='';
+  modifiedByChefDeLigne:string='';
+  formations:Formation[]=[];
   componentprogram:boolean=true
   programList:ListProgramme[]=[]
   program1!: ProgramFormation;
   @Input() operateur: any ='';
   @Input() add:boolean =true;
-  constructor(private program :ProgramServiceService,private dialog :MatDialog ,private operateurservice :OperateurServiceService ,private ligneservice:LigneServiceService,private operationservice:OperationServiceService) {
+  constructor(private formationService:FormationService,private program :ProgramServiceService,private dialog :MatDialog ,private operateurservice :OperateurServiceService ,private ligneservice:LigneServiceService,private operationservice:OperationServiceService) {
     
    }
 
@@ -33,6 +39,7 @@ export class ProgramformationConducteurMachineComponent implements OnInit {
     this.getAllprogram()
     this.getoperateurs()
     this.getAlllignes()
+    this.getallformations()
     //this.getListProgrammeBysession(1)
   }
   
@@ -172,5 +179,63 @@ getOperateursByOperations(event: any): void {
   console.log(idOperation);
 }
 
+
+onFormationChange(event: Event) {
+  const selectedFormationId = parseInt((event.target as HTMLSelectElement).value, 10); // Convertir en entier
+  
+  console.log(selectedFormationId);
+
+  let qualiteFound = false;
+  let prodFound = false;
+
+  for (const assignment of this.operateur.assignments) {
+    for (const evaluation of assignment.evaluation) {
+      const evalParIngenieurQualite = parseInt(evaluation.evaluationParIngenieurQualite, 10);
+      const evalParChefDeLigne = parseInt(evaluation.evaluationParChefDeLigne, 10);
+      this.modifiedByIngenieurQualite = evaluation.modifiedByIngenieurQualite;
+      this.modifiedByChefDeLigne = evaluation.modifiedByChefDeLigne;
+
+      if (evaluation.idFormation === selectedFormationId) {
+        if (evalParIngenieurQualite > 22 && evalParIngenieurQualite <= 25) {
+          console.log(evalParIngenieurQualite);
+          this.messageQualite = 'validé';
+          qualiteFound = true;
+        }
+
+        if (evalParChefDeLigne > 0 && evalParChefDeLigne <= 50) {
+          console.log(evalParChefDeLigne);
+          this.messageProd = 'validé';
+          prodFound = true;
+        }
+      }
+
+      // Si les deux conditions sont remplies, sortir des boucles
+      if (qualiteFound && prodFound) {
+       
+        break;
+      }
+    }
+
+    // Si les deux conditions sont remplies, sortir de la boucle externe
+    if (qualiteFound && prodFound) {
+      break;
+    }
+  }
+
+  // Mettre à jour les messages si les conditions ne sont pas remplies
+  if (!qualiteFound) {
+    this.messageQualite = 'Non-validé';
+  }
+  if (!prodFound) {
+    this.messageProd = 'Non-validé';
+  }
+}
+
+
+getallformations(){
+  this.formationService.getAllFormations().subscribe(data =>{
+    this.formations= data as Formation[]
+  })
+}
 
 }

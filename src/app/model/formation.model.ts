@@ -1,6 +1,6 @@
 export interface Formation {
     matriculeFormation:String ,
-    Id : number ;
+    id : number ;
     idDemandeRecrutement:number,
 	typeDeFormation :String,
     operationName:string,
